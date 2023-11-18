@@ -1,0 +1,5 @@
+google-cloud-logging
+langchain
+cohere
+gradio
+weaviate-client==3.*
