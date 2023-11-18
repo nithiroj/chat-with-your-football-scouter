@@ -67,8 +67,8 @@ def predict(message, history):
 
 
 ## Weaviate Client ##
-WEAVIATE_URL = os.getenv('WEAVIATE_URL')
-WEAVIATE_API_KEY = os.getenv('WEAVIATE_API_KEY')
+WEAVIATE_URL = os.environ.get('WEAVIATE_URL')
+WEAVIATE_API_KEY = os.environ.get('WEAVIATE_API_KEY')
 
 client = weaviate.Client(
     url=WEAVIATE_URL, auth_client_secret=weaviate.AuthApiKey(WEAVIATE_API_KEY),
