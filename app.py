@@ -17,15 +17,18 @@ from langchain.retrievers.weaviate_hybrid_search import WeaviateHybridSearchRetr
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 
-PROJECT_ID = os.environ.get('GCP_PROJECT')  # Your Google Cloud Project ID
-LOCATION = os.environ.get('GCP_REGION')  # Your Google Cloud Project Region
+# Your Google Cloud Project ID
+PROJECT_ID = os.environ.get('GCP_PROJECT', None)
+# Your Google Cloud Project Region
+LOCATION = os.environ.get('GCP_REGION', None)
 COHERE_API_KEY = os.environ.get('COHERE_API_KEY')
 
-client = google.cloud.logging.Client(project=PROJECT_ID)
-client.setup_logging()
+if PROJECT_ID:
+    client = google.cloud.logging.Client(project=PROJECT_ID)
+    client.setup_logging()
 
-log_name = "chat-scouter-app-log"
-logger = client.logger(log_name)
+    log_name = "chat-scouter-app-log"
+    logger = client.logger(log_name)
 
 chat_model = ChatCohere(model="command-nightly",
                         cohere_api_key=COHERE_API_KEY)
